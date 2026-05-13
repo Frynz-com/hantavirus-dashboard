@@ -808,9 +808,12 @@ function CommunityPage() {
   return (
     <section>
       <SectionTitle eyebrow="Community" title="Community-Zugang" text="Tausche dich mit anderen Interessierten aus, stelle organisatorische Fragen und teile Erfahrungen. Medizinische, rechtliche oder behördliche Fragen müssen mit qualifizierten Fachstellen geklärt werden." />
+      <a href="https://t.me/+gPUvAa4yR4s4NWE6" target="_blank" rel="noreferrer" className="mb-6 inline-flex h-12 items-center gap-2 rounded-2xl bg-teal-600 px-5 text-sm font-bold text-white hover:bg-teal-700">
+        Telegram-Kanal öffnen <ExternalLink className="h-4 w-4" />
+      </a>
       <div className="mb-6 rounded-[22px] border border-amber-200 bg-amber-50 p-5">
-        <p className="text-sm font-bold text-amber-950">Telegram-Link noch eintragen</p>
-        <p className="mt-2 text-sm leading-6 text-amber-900">Hier sollte vor Veröffentlichung die echte Gruppen-URL hinterlegt werden. Bis dahin wird kein generischer oder falscher Telegram-Link angezeigt.</p>
+        <p className="text-sm font-bold text-amber-950">Hinweis zum Austausch</p>
+        <p className="mt-2 text-sm leading-6 text-amber-900">Der Kanal dient dem organisatorischen Austausch. Medizinische, rechtliche oder behördliche Fragen müssen mit qualifizierten Fachstellen geklärt werden.</p>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
         {rules.map((rule) => (
