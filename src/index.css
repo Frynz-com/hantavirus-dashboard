@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 35 14% 7%;
+    --foreground: 42 42% 95%;
+    --card: 200 24% 7%;
+    --card-foreground: 42 42% 95%;
+    --popover: 200 24% 7%;
+    --popover-foreground: 42 42% 95%;
+    --primary: 42 58% 63%;
+    --primary-foreground: 35 14% 7%;
+    --secondary: 42 28% 90%;
+    --secondary-foreground: 35 18% 8%;
+    --muted: 35 11% 16%;
+    --muted-foreground: 40 12% 70%;
+    --accent: 42 58% 63%;
+    --accent-foreground: 35 14% 7%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 42 24% 24%;
+    --input: 42 24% 24%;
+    --ring: 42 58% 63%;
+    --radius: 0px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background: #14120f;
+  }
+
+  body {
+    @apply bg-[#14120f] text-[#f8f2e8] antialiased;
+    margin: 0;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .field-label {
+    @apply flex flex-col gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#17130f]/55;
+  }
+
+  .field-input {
+    @apply h-14 w-full border bg-transparent px-4 text-base font-medium normal-case tracking-normal text-[#17130f] outline-none transition focus:border-[#8a6a28] focus:bg-white/55;
+    border-color: rgba(23, 19, 15, 0.14);
+  }
+
+  .field-input::placeholder {
+    color: rgba(23, 19, 15, 0.34);
+  }
+}
+
+.hero-reveal {
+  animation: hero-rise 980ms cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.hero-reveal:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+.hero-reveal:nth-child(3) {
+  animation-delay: 180ms;
+}
+
+.hero-reveal:nth-child(4) {
+  animation-delay: 270ms;
+}
+
+.patent-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+.patent-field::before {
+  content: "";
+  position: absolute;
+  right: -10vw;
+  top: 12vh;
+  width: min(74vw, 980px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(216, 183, 104, 0.14);
+  transform: rotate(-12deg);
+  background:
+    linear-gradient(90deg, rgba(216, 183, 104, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(216, 183, 104, 0.08) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle, black 0%, black 42%, transparent 72%);
+  animation: field-drift 18s ease-in-out infinite alternate;
+}
+
+.patent-field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 71% 37%, rgba(216, 183, 104, 0.2), transparent 18%),
+    radial-gradient(circle at 81% 64%, rgba(255, 255, 255, 0.08), transparent 22%);
+  filter: blur(2px);
+}
+
+.patent-core {
+  position: absolute;
+  right: clamp(56px, 15vw, 260px);
+  top: clamp(170px, 33vh, 360px);
+  display: grid;
+  height: 132px;
+  width: 132px;
+  place-items: center;
+  border: 1px solid rgba(216, 183, 104, 0.38);
+  color: rgba(242, 213, 139, 0.88);
+  background: rgba(20, 18, 15, 0.42);
+  box-shadow: 0 0 70px rgba(216, 183, 104, 0.14);
+  animation: pulse-core 4.8s ease-in-out infinite;
+}
+
+.patent-ring {
+  position: absolute;
+  border: 1px solid rgba(216, 183, 104, 0.18);
+  border-radius: 999px;
+  animation: pulse-ring 7s ease-in-out infinite;
+}
+
+.patent-ring-one {
+  right: clamp(0px, 8vw, 160px);
+  top: clamp(95px, 22vh, 250px);
+  height: clamp(330px, 42vw, 650px);
+  width: clamp(330px, 42vw, 650px);
+}
+
+.patent-ring-two {
+  right: clamp(100px, 19vw, 340px);
+  top: clamp(235px, 41vh, 470px);
+  height: clamp(180px, 22vw, 350px);
+  width: clamp(180px, 22vw, 350px);
+  animation-delay: -2s;
+}
+
+.patent-node,
+.patent-line {
+  position: absolute;
+  display: block;
+  background: rgba(216, 183, 104, 0.66);
+}
+
+.patent-node {
+  height: 7px;
+  width: 7px;
+  border-radius: 999px;
+  box-shadow: 0 0 24px rgba(216, 183, 104, 0.55);
+  animation: node-glow 3.8s ease-in-out infinite alternate;
+}
+
+.patent-line {
+  height: 1px;
+  transform-origin: left center;
+  opacity: 0.38;
+  animation: line-scan 5.8s ease-in-out infinite;
+}
+
+.patent-node-1 { right: 19%; top: 24%; }
+.patent-node-2 { right: 31%; top: 31%; animation-delay: -1s; }
+.patent-node-3 { right: 12%; top: 42%; animation-delay: -2s; }
+.patent-node-4 { right: 26%; top: 54%; animation-delay: -1.8s; }
+.patent-node-5 { right: 42%; top: 48%; animation-delay: -2.5s; }
+.patent-node-6 { right: 7%; top: 66%; animation-delay: -1.2s; }
+.patent-node-7 { right: 36%; top: 72%; animation-delay: -2.9s; }
+.patent-node-8 { right: 20%; top: 78%; animation-delay: -0.9s; }
+.patent-node-9 { right: 48%; top: 28%; animation-delay: -1.7s; }
+.patent-node-10 { right: 55%; top: 60%; animation-delay: -2.3s; }
+
+.patent-line-1 { right: 19%; top: 24.5%; width: 240px; transform: rotate(151deg); }
+.patent-line-2 { right: 13%; top: 42.5%; width: 210px; transform: rotate(202deg); animation-delay: -1s; }
+.patent-line-3 { right: 27%; top: 54.5%; width: 260px; transform: rotate(186deg); animation-delay: -2s; }
+.patent-line-4 { right: 20%; top: 78.5%; width: 190px; transform: rotate(212deg); animation-delay: -2.8s; }
+.patent-line-5 { right: 32%; top: 31.5%; width: 190px; transform: rotate(166deg); animation-delay: -3.4s; }
+.patent-line-6 { right: 8%; top: 66.5%; width: 230px; transform: rotate(197deg); animation-delay: -4s; }
+.patent-line-7 { right: 43%; top: 48.5%; width: 170px; transform: rotate(237deg); animation-delay: -4.4s; }
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes field-drift {
+  from {
+    transform: translate3d(0, 0, 0) rotate(-12deg) scale(1);
+  }
+  to {
+    transform: translate3d(-32px, 18px, 0) rotate(-9deg) scale(1.04);
+  }
+}
+
+@keyframes pulse-core {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.82;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.18;
+  }
+}
+
+@keyframes node-glow {
+  from {
+    opacity: 0.34;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.28);
+  }
+}
+
+@keyframes line-scan {
+  0%, 100% {
+    opacity: 0.14;
+    clip-path: inset(0 78% 0 0);
+  }
+  48%, 62% {
+    opacity: 0.55;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (max-width: 900px) {
+  .patent-field {
+    opacity: 0.52;
+  }
+
+  .patent-core,
+  .patent-ring,
+  .patent-node,
+  .patent-line {
+    transform: scale(0.72);
+  }
+}

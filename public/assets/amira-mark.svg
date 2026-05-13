@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Amira Gebäudereinigung">
+  <rect width="128" height="128" fill="#fff"/>
+  <rect x="8" y="8" width="112" height="112" fill="none" stroke="#C8102E" stroke-opacity=".22" stroke-width="4"/>
+  <path fill="#C8102E" d="M65.7 28h-3.4L31.4 100h15.4l5.3-13.6h23.3L80.7 100h15.9L65.7 28Zm-9.1 46.3L63.7 56l7.2 18.3H56.6Z"/>
+  <rect x="91" y="91" width="13" height="13" fill="#C8102E"/>
+</svg>
