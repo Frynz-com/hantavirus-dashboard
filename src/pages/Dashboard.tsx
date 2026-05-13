@@ -34,7 +34,7 @@ import {
   Star,
   Wrench,
 } from "lucide-react"
-import { authorityContacts, authorityWorkflow, equipmentGroups, memberDocuments, newsItems, portalResources, supplierFilters, suppliers, templates, type MemberDocument, type PortalResource, type RiskLevel, type Supplier } from "@/data/hantavirusPortal"
+import { authorityContacts, authorityWorkflow, equipmentGroups, goLiveChecklist, memberDocuments, newsItems, portalMeta, portalResources, supplierFilters, suppliers, templates, type GoLiveItem, type MemberDocument, type PortalResource, type RiskLevel, type Supplier } from "@/data/hantavirusPortal"
 
 type NavKey =
   | "overview"
@@ -126,6 +126,12 @@ function riskClass(level: RiskLevel) {
   if (level === "high") return "border-rose-200 bg-rose-50 text-rose-700"
   if (level === "medium") return "border-amber-200 bg-amber-50 text-amber-700"
   return "border-emerald-200 bg-emerald-50 text-emerald-700"
+}
+
+function goLiveClass(status: GoLiveItem["status"]) {
+  if (status === "Erledigt") return "border-emerald-200 bg-emerald-50 text-emerald-700"
+  if (status === "Offen") return "border-rose-200 bg-rose-50 text-rose-700"
+  return "border-amber-200 bg-amber-50 text-amber-700"
 }
 
 function Card({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -305,6 +311,19 @@ function Overview({ setActive }: { setActive: (key: NavKey) => void }) {
               <ShieldAlert className="h-5 w-5 text-amber-600" />
               <p className="text-sm font-bold text-slate-800">{item}</p>
             </div>
+          </Card>
+        ))}
+      </div>
+      <div className="mt-5 grid gap-4 md:grid-cols-4">
+        {[
+          ["Datenstand", portalMeta.dataStatus],
+          ["Supplier", portalMeta.supplierCount.toString()],
+          ["Dokumente", portalMeta.documentCount.toString()],
+          ["Nutzung", portalMeta.intendedUse],
+        ].map(([label, value]) => (
+          <Card key={label} className="p-5">
+            <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">{label}</p>
+            <p className="mt-2 text-base font-semibold text-slate-950">{value}</p>
           </Card>
         ))}
       </div>
@@ -843,6 +862,20 @@ function LegalPage() {
             </div>
           </Card>
         ))}
+      </div>
+      <div className="mt-7">
+        <h3 className="mb-4 text-lg font-semibold text-slate-950">Go-live-Check für Betreiber</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          {goLiveChecklist.map((item) => (
+            <Card key={item.title} className="p-5">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <span className={`rounded-full border px-3 py-1 text-xs font-bold ${goLiveClass(item.status)}`}>{item.status}</span>
+              </div>
+              <h4 className="text-base font-semibold text-slate-950">{item.title}</h4>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{item.description}</p>
+            </Card>
+          ))}
+        </div>
       </div>
       <ResourceGrid resources={portalResources.filter((resource) => ["Arbeitsschutz", "Regelwerk", "Fachinformation"].includes(resource.area))} title="Regelwerke und fachliche Orientierung" />
     </section>

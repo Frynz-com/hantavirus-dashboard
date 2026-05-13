@@ -59,6 +59,20 @@ export type AuthorityContact = {
   note: string
 }
 
+export type GoLiveItem = {
+  title: string
+  status: "Erledigt" | "Offen" | "Empfohlen"
+  description: string
+}
+
+export const portalMeta = {
+  name: "Hantavirus Präventionsnetzwerk",
+  dataStatus: "13.05.2026",
+  supplierCount: 18,
+  documentCount: 12,
+  intendedUse: "Informations- und Orientierungsplattform",
+}
+
 const labNotice =
   "Nur für qualifizierte Labore/Fachstellen. Nicht für Laienanwendungen oder eigenständige Testangebote verwenden. Zweckbestimmung, regulatorischen Status und IVDR/CE-IVD-Informationen direkt beim Anbieter prüfen."
 
@@ -562,6 +576,39 @@ export const authorityWorkflow = [
   {
     title: "Dokumentation ablegen",
     text: "Datum, Kontaktstelle, Antwort, offene Punkte und Folgeaufgaben im Portal oder in der Einsatzdokumentation festhalten.",
+  },
+]
+
+export const goLiveChecklist: GoLiveItem[] = [
+  {
+    title: "Cloudflare-URL / Deployment",
+    status: "Empfohlen",
+    description: "Kurzer Worker-Name ist vorbereitet. Für den finalen Deploy wird ein Cloudflare API Token oder ein manueller Cloudflare-Dashboard-Deploy benötigt.",
+  },
+  {
+    title: "Zugriffsschutz",
+    status: "Offen",
+    description: "Vor Verkauf sollte Cloudflare Access, ein Membership-System oder eine andere echte Zugriffskontrolle aktiv sein. Eine rein sichtbare Dashboard-Oberfläche ist kein Schutz.",
+  },
+  {
+    title: "Impressum, Datenschutz, AGB",
+    status: "Offen",
+    description: "Für den öffentlichen Betrieb in Deutschland sollten rechtskonforme Betreibertexte und Datenschutzinformationen durch eine geeignete Stelle erstellt und eingebunden werden.",
+  },
+  {
+    title: "Fachliche / rechtliche Inhaltsprüfung",
+    status: "Empfohlen",
+    description: "Lieferantenlinks, PDFs, Hinweise und Vorlagen sollten vor externer Nutzung fachlich und rechtlich geprüft werden.",
+  },
+  {
+    title: "Telegram-Kanal",
+    status: "Erledigt",
+    description: "Der bereitgestellte Telegram-Einladungslink ist im Community-Bereich hinterlegt.",
+  },
+  {
+    title: "Vorlagenfreigabe",
+    status: "Offen",
+    description: "Vorlagen sind bewusst als demnächst verfügbar markiert, bis editierbare Fassungen final geprüft und freigegeben sind.",
   },
 ]
 

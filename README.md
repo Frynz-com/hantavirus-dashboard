@@ -1,73 +1,83 @@
-# React + TypeScript + Vite
+# Hantavirus Präventionsnetzwerk
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modernes Mitglieder-Dashboard für eine Informations- und Orientierungsplattform rund um Hantavirus-Prävention, Schutzmaterial, Reinigung, Desinfektion, Schädlingsprävention, Lieferantenrecherche und mögliche Fachpartner.
 
-Currently, two official plugins are available:
+## Wichtiger Hinweis
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Dieses Projekt verkauft keine medizinischen Tests, gibt keine medizinische Beratung, erteilt keine Zulassungen und übernimmt keine Haftung für die konkrete Verwendung einzelner Produkte, Anbieter oder Dienstleistungen. Alle Inhalte dienen ausschließlich der allgemeinen Orientierung. Vor Veröffentlichung und Verkauf sollten Inhalte, Betreibertexte und Prozesse rechtlich und fachlich geprüft werden.
 
-## React Compiler
+## Inhalte
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Lieferanten- und Ausrüstungsübersicht mit Suche, Filtern, Risiko-Badges und Favoriten
+- Dokumenten-Bibliothek mit 12 PDF-Unterlagen
+- Aktuelles & Behörden mit offiziellen Quellen, Monitoring und Behördenfinder
+- Reinigung, Desinfektion und Schädlingsprävention als vorsichtige Orientierung
+- Labor- und Fachpartnerbereich mit regulatorisch sensiblen Hinweisen
+- Community-Bereich mit Telegram-Kanal
+- Vorlagen-Center als “Demnächst verfügbar”
+- Rechtliche Hinweise und Go-live-Check für Betreiber
 
-## Expanding the ESLint configuration
+## Entwicklung
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Lokale App: `http://127.0.0.1:3001/` oder der von Vite angezeigte Port.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Prüfung
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run lint
+npm run build
 ```
+
+Beide Kommandos sollten vor jedem Deployment sauber laufen.
+
+## Cloudflare Workers Deployment
+
+Die Wrangler-Konfiguration ist vorbereitet für den kurzen Worker-Namen:
+
+```txt
+hv-dashboard
+```
+
+Ziel-URL nach erfolgreichem Deploy:
+
+```txt
+https://hv-dashboard.noebel59.workers.dev
+```
+
+Deployment:
+
+```bash
+export CLOUDFLARE_API_TOKEN="DEIN_TOKEN_HIER"
+npm run deploy:cloudflare
+```
+
+Ohne API Token kann Wrangler in nicht-interaktiven Umgebungen nicht deployen.
+
+## Dokumente
+
+PDF-Dateien liegen unter:
+
+```txt
+public/downloads/hantavirus
+```
+
+Sie werden im Dashboard im Bereich **Dokumente** angezeigt.
+
+## Vorlagen
+
+Der Bereich **Vorlagen** ist bewusst als “Demnächst verfügbar” markiert. Unfertige editierbare Vorlagen werden nicht öffentlich ausgeliefert, bis sie geprüft und freigegeben sind.
+
+## Go-live Hinweise
+
+Vor Verkauf oder öffentlichem Betrieb sind mindestens zu klären:
+
+- echter Zugriffsschutz, z. B. Cloudflare Access oder Membership-System
+- Impressum, Datenschutz, AGB und Widerrufstexte
+- fachliche und rechtliche Prüfung der Inhalte und PDFs
+- finaler Cloudflare-Deploy unter gewünschtem Worker-Namen
+- laufender Prozess zur Link- und Quellenprüfung
