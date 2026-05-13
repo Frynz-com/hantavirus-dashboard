@@ -32,6 +32,16 @@ export type TemplateFile = {
   file: string
 }
 
+export type MemberDocument = {
+  title: string
+  description: string
+  category: string
+  file: string
+  size: string
+  audience: string
+  note: string
+}
+
 export type NewsItem = {
   title: string
   source: string
@@ -553,6 +563,117 @@ export const authorityWorkflow = [
   {
     title: "Dokumentation ablegen",
     text: "Datum, Kontaktstelle, Antwort, offene Punkte und Folgeaufgaben im Portal oder in der Einsatzdokumentation festhalten.",
+  },
+]
+
+export const memberDocuments: MemberDocument[] = [
+  {
+    title: "Hantavirus Informations",
+    description: "Allgemeines Informationsdokument zum Thema Hantavirus und Orientierung für Nutzer.",
+    category: "Grundlagen",
+    file: "/downloads/hantavirus/hantavirus-information.pdf",
+    size: "1,9 MB",
+    audience: "Allgemeine Orientierung",
+    note: "Inhalt vor Weitergabe auf Aktualität und Zielgruppe prüfen.",
+  },
+  {
+    title: "Hantavirus Factsheet",
+    description: "Kompakte Zusammenfassung als schneller Überblick.",
+    category: "Grundlagen",
+    file: "/downloads/hantavirus/hantavirus-factsheet.pdf",
+    size: "407 KB",
+    audience: "Schnellüberblick",
+    note: "Nicht als medizinische Beratung oder verbindliche Handlungsanweisung verwenden.",
+  },
+  {
+    title: "Hantavirus Schnellreferenz",
+    description: "Kurzreferenz für die schnelle interne Orientierung.",
+    category: "Schnellreferenz",
+    file: "/downloads/hantavirus/hantavirus-schnellreferenz.pdf",
+    size: "359 KB",
+    audience: "Interne Nutzung",
+    note: "Als Checkhilfe nutzen; konkrete Entscheidungen fachlich prüfen.",
+  },
+  {
+    title: "Hantavirus FAQ",
+    description: "Fragen-und-Antworten-Dokument für häufige organisatorische Themen.",
+    category: "FAQ",
+    file: "/downloads/hantavirus/hantavirus-faq.pdf",
+    size: "376 KB",
+    audience: "Kundenkontakt / intern",
+    note: "Antworten nicht als Diagnose-, Rechts- oder Zulassungsaussagen einsetzen.",
+  },
+  {
+    title: "Hantavirus Symptome",
+    description: "Informationsdokument zu Symptomen und Einordnung.",
+    category: "Gesundheitsinformation",
+    file: "/downloads/hantavirus/hantavirus-symptome.pdf",
+    size: "1,2 MB",
+    audience: "Sensibler Informationsbereich",
+    note: "Medizinische Fragen ausschließlich an qualifizierte medizinische Stellen verweisen.",
+  },
+  {
+    title: "Hantavirus Immunsupprimierte",
+    description: "Informationsdokument für besonders sensible Personengruppen.",
+    category: "Gesundheitsinformation",
+    file: "/downloads/hantavirus/hantavirus-immunsupprimierte.pdf",
+    size: "560 KB",
+    audience: "Sensibler Informationsbereich",
+    note: "Keine individuelle Beratung; ärztliche Abklärung ist Sache qualifizierter medizinischer Stellen.",
+  },
+  {
+    title: "Hantavirus Prävention",
+    description: "Orientierung zu Prävention und Schutzmaßnahmen.",
+    category: "Prävention",
+    file: "/downloads/hantavirus/hantavirus-praevention.pdf",
+    size: "744 KB",
+    audience: "Prävention / Organisation",
+    note: "Nicht als Ersatz für Gefährdungsbeurteilung oder behördliche Prüfung verwenden.",
+  },
+  {
+    title: "Hantavirus Homeprep",
+    description: "Vorbereitungsorientierte Informationen für Objekte und häusliche Bereiche.",
+    category: "Vorbereitung",
+    file: "/downloads/hantavirus/hantavirus-homeprep.pdf",
+    size: "946 KB",
+    audience: "Objektvorbereitung",
+    note: "Tätigkeiten und Schutzbedarf eigenverantwortlich mit Fachstellen prüfen.",
+  },
+  {
+    title: "Hantavirus Reinigungsanleitung",
+    description: "Reinigungsbezogene Orientierung und strukturierte Hinweise.",
+    category: "Reinigung",
+    file: "/downloads/hantavirus/hantavirus-reinigungsanleitung.pdf",
+    size: "1,1 MB",
+    audience: "Reinigung / Desinfektion",
+    note: "Nur als allgemeine Orientierung; keine verbindliche Arbeitsanweisung.",
+  },
+  {
+    title: "Hantavirus Leitfaden",
+    description: "Übergreifender Leitfaden für Struktur, Vorbereitung und Einordnung.",
+    category: "Leitfaden",
+    file: "/downloads/hantavirus/hantavirus-leitfaden.pdf",
+    size: "234 KB",
+    audience: "Mitglieder / interne Nutzung",
+    note: "Vor externer Nutzung juristisch und fachlich prüfen.",
+  },
+  {
+    title: "Hantavirus Reiseratgeber",
+    description: "Orientierung mit Bezug zu Reisen und Aufenthalten.",
+    category: "Reise",
+    file: "/downloads/hantavirus/hantavirus-reiseratgeber.pdf",
+    size: "123 KB",
+    audience: "Allgemeine Orientierung",
+    note: "Reise- und Gesundheitsfragen mit offiziellen Stellen oder Ärzten klären.",
+  },
+  {
+    title: "Schädlingsbekämpfung",
+    description: "Dokument zur Schädlingsbekämpfung und organisatorischen Einordnung.",
+    category: "Schädlingsprävention",
+    file: "/downloads/hantavirus/schaedlingsbekaempfung.pdf",
+    size: "132 KB",
+    audience: "Objektkontrolle / Fachbetrieb",
+    note: "Maßnahmen, Zulässigkeit und Durchführung mit qualifizierten Fachbetrieben prüfen.",
   },
 ]
 

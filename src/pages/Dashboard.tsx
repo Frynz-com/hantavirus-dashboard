@@ -10,6 +10,7 @@ import {
   ClipboardCheck,
   Download,
   ExternalLink,
+  FileDown,
   FileText,
   FlaskConical,
   HeartHandshake,
@@ -33,7 +34,7 @@ import {
   Star,
   Wrench,
 } from "lucide-react"
-import { authorityContacts, authorityWorkflow, equipmentGroups, newsItems, portalResources, supplierFilters, suppliers, templates, type PortalResource, type RiskLevel, type Supplier } from "@/data/hantavirusPortal"
+import { authorityContacts, authorityWorkflow, equipmentGroups, memberDocuments, newsItems, portalResources, supplierFilters, suppliers, templates, type MemberDocument, type PortalResource, type RiskLevel, type Supplier } from "@/data/hantavirusPortal"
 
 type NavKey =
   | "overview"
@@ -44,6 +45,7 @@ type NavKey =
   | "pests"
   | "labs"
   | "updates"
+  | "documents"
   | "templates"
   | "checks"
   | "community"
@@ -65,6 +67,7 @@ const navItems: NavItem[] = [
   { key: "pests", label: "Schädlingsprävention", icon: ShieldCheck },
   { key: "labs", label: "Labor- & Fachpartner", icon: FlaskConical },
   { key: "updates", label: "Aktuelles & Behörden", icon: Newspaper },
+  { key: "documents", label: "Dokumente", icon: FileDown },
   { key: "templates", label: "Vorlagen", icon: FileText },
   { key: "checks", label: "Checklisten", icon: ClipboardCheck },
   { key: "community", label: "Community", icon: MessageCircle },
@@ -270,7 +273,7 @@ function Overview({ setActive }: { setActive: (key: NavKey) => void }) {
     ["Lieferantenübersicht", "Mögliche Anbieter, Kategorien und Prüfhinsweise strukturiert durchsuchen.", Building2, "suppliers" as NavKey],
     ["Ausrüstungs-Checkliste", "PSA, Reinigung und Dokumentation mit Status verfolgen.", PackageCheck, "equipment" as NavKey],
     ["Aktuelles & Behörden", "Offizielle Quellen, Monitoring und Stadt-/Gesundheitsamt-Anfragen.", Newspaper, "updates" as NavKey],
-    ["Vorlagen & Dokumente", "Anfragen, Einsatzprotokolle, Kundenhinweise und Behördenkontakt.", FileText, "templates" as NavKey],
+    ["Dokumenten-Bibliothek", "PDF-Unterlagen öffnen, prüfen und bei Bedarf herunterladen.", FileDown, "documents" as NavKey],
   ]
   const info = ["Keine medizinische Beratung", "Eigenverantwortliche Prüfung", "Nur Informations- und Orientierungsplattform", "Keine Garantie für Zulassung oder Eignung"]
 
@@ -660,6 +663,92 @@ function UpdatesPage() {
   )
 }
 
+function DocumentCard({ document }: { document: MemberDocument }) {
+  return (
+    <Card className="flex h-full flex-col p-5">
+      <div className="mb-4 flex flex-wrap items-center gap-2">
+        <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">{document.category}</span>
+        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">{document.size}</span>
+      </div>
+      <h3 className="text-lg font-semibold text-slate-950">{document.title}</h3>
+      <p className="mt-2 text-sm leading-6 text-slate-600">{document.description}</p>
+      <div className="mt-4 rounded-2xl bg-slate-50 p-3">
+        <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Nutzung</p>
+        <p className="mt-1 text-sm font-semibold text-slate-800">{document.audience}</p>
+      </div>
+      <p className="mt-4 rounded-2xl bg-amber-50 p-3 text-xs font-semibold leading-5 text-amber-900">{document.note}</p>
+      <div className="mt-auto flex gap-2 pt-5">
+        <a href={document.file} target="_blank" rel="noreferrer" className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-slate-950 text-sm font-bold text-white hover:bg-teal-700">
+          Öffnen <BookOpen className="h-4 w-4" />
+        </a>
+        <a href={document.file} download className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700">
+          Download <Download className="h-4 w-4" />
+        </a>
+      </div>
+    </Card>
+  )
+}
+
+function DocumentsPage() {
+  const [query, setQuery] = useState("")
+  const [category, setCategory] = useState("Alle")
+  const categories = useMemo(() => ["Alle", ...Array.from(new Set(memberDocuments.map((document) => document.category)))], [])
+  const filteredDocuments = useMemo(() => {
+    const needle = query.toLowerCase()
+    return memberDocuments.filter((document) => {
+      const matchesText = [document.title, document.description, document.category, document.audience, document.note].join(" ").toLowerCase().includes(needle)
+      const matchesCategory = category === "Alle" || document.category === category
+      return matchesText && matchesCategory
+    })
+  }, [category, query])
+
+  return (
+    <section>
+      <SectionTitle
+        eyebrow="Dokumente"
+        title="Dokumenten-Bibliothek"
+        text="Hier liegen die eingepflegten PDF-Unterlagen für Mitglieder. Alle Dokumente sind als Download-Material gedacht und müssen vor externer Weitergabe eigenverantwortlich fachlich, rechtlich und inhaltlich geprüft werden."
+      />
+      <div className="mb-5 grid gap-4 md:grid-cols-3">
+        <Card className="p-4">
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Dokumente</p>
+          <p className="mt-2 text-2xl font-semibold text-slate-950">{memberDocuments.length}</p>
+        </Card>
+        <Card className="p-4">
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Kategorien</p>
+          <p className="mt-2 text-2xl font-semibold text-slate-950">{categories.length - 1}</p>
+        </Card>
+        <Card className="p-4">
+          <p className="text-xs font-black uppercase tracking-[0.14em] text-slate-400">Format</p>
+          <p className="mt-2 text-2xl font-semibold text-slate-950">PDF</p>
+        </Card>
+      </div>
+      <Card className="mb-5 p-4">
+        <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
+          <label className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Dokumente, Kategorien oder Hinweise suchen" className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm font-medium text-slate-800 outline-none ring-teal-500 transition focus:bg-white focus:ring-2" />
+          </label>
+          <select value={category} onChange={(event) => setCategory(event.target.value)} className="h-12 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-bold text-slate-700 outline-none ring-teal-500 focus:ring-2">
+            {categories.map((item) => <option key={item}>{item}</option>)}
+          </select>
+        </div>
+      </Card>
+      {filteredDocuments.length ? (
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {filteredDocuments.map((document) => <DocumentCard key={document.file} document={document} />)}
+        </div>
+      ) : (
+        <Card className="p-8 text-center">
+          <FileDown className="mx-auto h-10 w-10 text-slate-300" />
+          <h3 className="mt-4 text-lg font-semibold text-slate-950">Keine Dokumente gefunden</h3>
+          <p className="mt-2 text-sm text-slate-600">Passe Suche oder Kategorie an.</p>
+        </Card>
+      )}
+    </section>
+  )
+}
+
 function TemplatesPage() {
   return (
     <section>
@@ -799,6 +888,7 @@ function Content({ active, setActive }: { active: NavKey; setActive: (key: NavKe
   if (active === "pests") return <PestsPage />
   if (active === "labs") return <LabsPage />
   if (active === "updates") return <UpdatesPage />
+  if (active === "documents") return <DocumentsPage />
   if (active === "templates") return <TemplatesPage />
   if (active === "checks") return <ChecklistsPage />
   if (active === "community") return <CommunityPage />
