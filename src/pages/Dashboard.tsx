@@ -752,16 +752,21 @@ function DocumentsPage() {
 function TemplatesPage() {
   return (
     <section>
-      <SectionTitle eyebrow="Vorlagen" title="Download-Karten für Vorlagen" text="Die Dateien sind als sofort nutzbare Textvorlagen vorbereitet und können später durch PDF- oder DOCX-Dokumente ersetzt werden." />
+      <SectionTitle eyebrow="Vorlagen" title="Vorlagen-Center" text="Dieser Bereich ist für editierbare Anfrage-, Dokumentations- und Hinweisvorlagen vorgesehen. Die finalen Dateien werden nach fachlicher und rechtlicher Prüfung freigeschaltet." />
+      <div className="mb-5 rounded-[22px] border border-teal-200 bg-teal-50 p-5 text-sm font-semibold leading-6 text-teal-950">
+        <Info className="mr-2 inline h-5 w-5" />
+        Vorlagen werden derzeit redaktionell vorbereitet. Bis zur Freigabe stehen die PDF-Unterlagen im Bereich Dokumente zur Verfügung.
+      </div>
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {templates.map((template) => (
           <Card key={template.title} className="p-5">
             <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">{template.category}</span>
+            <span className="ml-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800">Demnächst verfügbar</span>
             <h3 className="mt-4 text-lg font-semibold text-slate-950">{template.title}</h3>
             <p className="mt-2 min-h-12 text-sm leading-6 text-slate-600">{template.description}</p>
             <div className="mt-5 flex gap-2">
-              <a href={template.file} target="_blank" rel="noreferrer" className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl bg-slate-950 text-sm font-bold text-white"><BookOpen className="h-4 w-4" />Öffnen</a>
-              <a href={template.file} download className="inline-flex h-10 flex-1 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700"><Download className="h-4 w-4" />Herunterladen</a>
+              <button type="button" disabled className="inline-flex h-10 flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-slate-100 text-sm font-bold text-slate-400"><BookOpen className="h-4 w-4" />Öffnen</button>
+              <button type="button" disabled className="inline-flex h-10 flex-1 cursor-not-allowed items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-400"><Download className="h-4 w-4" />Download</button>
             </div>
           </Card>
         ))}
