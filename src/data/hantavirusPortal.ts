@@ -32,6 +32,24 @@ export type TemplateFile = {
   file: string
 }
 
+export type NewsItem = {
+  title: string
+  source: string
+  dateLabel: string
+  summary: string
+  url: string
+  type: "Offizielle Quelle" | "Monitoring" | "Fachdaten" | "Presse prüfen"
+}
+
+export type AuthorityContact = {
+  title: string
+  organization: string
+  description: string
+  url: string
+  useFor: string[]
+  note: string
+}
+
 const labNotice =
   "Nur für qualifizierte Labore/Fachstellen. Nicht als Laien-Schnelltest oder eigenständiges Testzentrum verwenden. Zulassung, Zweckbestimmung und IVDR/CE-IVD-Status direkt beim Anbieter prüfen."
 
@@ -403,6 +421,139 @@ export const portalResources: PortalResource[] = [
     area: "Internationale Orientierung",
     riskNote: "Globale Information; lokale Fachstellen bleiben maßgeblich.",
   },
+  {
+    title: "Nationales Referenzlabor für Hantaviren",
+    organization: "Friedrich-Loeffler-Institut",
+    description: "Veterinärmedizinische Fachinformationen zu Hantaviren, Reservoiren und aktueller Situation.",
+    url: "https://www.fli.de/de/institute/institut-fuer-neue-und-neuartige-tierseuchenerreger-innt/referenzlabore/nrl-fuer-hantaviren/",
+    area: "Forschung / Tiergesundheit",
+    riskNote: "Fachinformation; Humanmedizin und öffentliche Gesundheit separat klären.",
+  },
+  {
+    title: "SurvStat@RKI",
+    organization: "Robert Koch-Institut",
+    description: "Abfrage von Meldedaten nach Infektionsschutzgesetz über das Web.",
+    url: "https://www.rki.de/DE/Aktuelles/Publikationen/Forschungsdaten/survstat_inhalt.html",
+    area: "Fachdaten",
+    riskNote: "Dateninterpretation erfordert Kontext; keine Prognose oder Beratung ableiten.",
+  },
+  {
+    title: "Online PLZ-Tool des RKI",
+    organization: "Robert Koch-Institut",
+    description: "Ermittelt anhand von Postleitzahl oder Ort das zuständige Gesundheitsamt.",
+    url: "https://tools.rki.de/plztool/",
+    area: "Behördenkontakt",
+    riskNote: "Für Zuständigkeitsrecherche; konkrete Anfrage über offizielle Kontaktwege stellen.",
+  },
+]
+
+export const newsItems: NewsItem[] = [
+  {
+    title: "WHO Fact Sheet: Hantavirus",
+    source: "WHO",
+    dateLabel: "Aktualisiert: 06.05.2026",
+    summary: "Globale Übersicht zu Übertragung, Symptomen, Prävention und regionalen Unterschieden. Für lokale Entscheidungen immer deutsche Fachstellen einbeziehen.",
+    url: "https://www.who.int/news-room/fact-sheets/detail/hantavirus",
+    type: "Offizielle Quelle",
+  },
+  {
+    title: "CDC: About Andes Virus",
+    source: "CDC",
+    dateLabel: "Aktualisiert: 07.05.2026",
+    summary: "Einordnung zum Andes-Virus als besonderem Hantavirus-Typ. Wichtig für internationales Monitoring, aber nicht 1:1 auf deutsche Objektarbeit übertragen.",
+    url: "https://www.cdc.gov/hantavirus/about/andesvirus.html",
+    type: "Offizielle Quelle",
+  },
+  {
+    title: "RKI Hantavirus-Infektionen",
+    source: "Robert Koch-Institut",
+    dateLabel: "Themenseite",
+    summary: "Zentrale deutsche Fachseite mit Ratgeber, Merkblättern, Spezialdiagnostik, epidemiologischen Hinweisen und weiterführenden Quellen.",
+    url: "https://www.rki.de/DE/Themen/Infektionskrankheiten/Infektionskrankheiten-A-Z/H/Hantavirus/hantavirus-node.html",
+    type: "Offizielle Quelle",
+  },
+  {
+    title: "RKI RSS-Feeds",
+    source: "Robert Koch-Institut",
+    dateLabel: "Monitoring",
+    summary: "RSS-Übersicht des RKI. Nutzer können relevante RKI-Feeds im eigenen Reader abonnieren und Änderungen an RKI-Dokumenten verfolgen.",
+    url: "https://www.rki.de/DE/Aktuelles/Neuigkeiten-und-Presse/Newsletter-und-RSS-Feeds/RSSFeed_Verweis.html",
+    type: "Monitoring",
+  },
+  {
+    title: "SurvStat@RKI Meldedaten",
+    source: "Robert Koch-Institut",
+    dateLabel: "Fachdaten",
+    summary: "Webzugang zu meldepflichtigen Krankheitsfällen und Erregernachweisen. Daten nur mit fachlichem Kontext interpretieren.",
+    url: "https://www.rki.de/DE/Aktuelles/Publikationen/Forschungsdaten/survstat_inhalt.html",
+    type: "Fachdaten",
+  },
+  {
+    title: "Google News Monitoring: Hantavirus Deutschland",
+    source: "Medienmonitoring",
+    dateLabel: "Live-Suche",
+    summary: "Medienlage beobachten. Einzelne Presseberichte immer gegen offizielle Quellen, Behörden und Fachstellen prüfen.",
+    url: "https://news.google.com/search?q=Hantavirus%20Deutschland&hl=de&gl=DE&ceid=DE%3Ade",
+    type: "Presse prüfen",
+  },
+]
+
+export const authorityContacts: AuthorityContact[] = [
+  {
+    title: "Zuständiges Gesundheitsamt finden",
+    organization: "RKI PLZ-Tool",
+    description: "Schnelle Zuständigkeitsrecherche über Postleitzahl oder Ort.",
+    url: "https://tools.rki.de/plztool/",
+    useFor: ["Gesundheitsamt finden", "Zuständigkeit klären", "Kontaktweg recherchieren"],
+    note: "Keine medizinischen Einzelfragen im Portal beantworten; Zuständigkeit und Kontaktweg offiziell prüfen.",
+  },
+  {
+    title: "Öffentlicher Gesundheitsdienst PLZ-Suche",
+    organization: "ÖGD",
+    description: "Alternative PLZ-Suche und Kontext zum öffentlichen Gesundheitsdienst.",
+    url: "https://www.oeffentlichergesundheitsdienst.de/plz-suche",
+    useFor: ["ÖGD-Anlaufstelle", "Kommunale Zuständigkeit", "Landes-/Kommunalstruktur"],
+    note: "Je nach Bundesland unterscheiden sich Zuständigkeiten und digitale Kontaktwege.",
+  },
+  {
+    title: "BMG Kontakt",
+    organization: "Bundesministerium für Gesundheit",
+    description: "Allgemeiner Kontakt, Bürgertelefon und Hinweise des Bundesministeriums.",
+    url: "https://www.bundesgesundheitsministerium.de/service/kontakt",
+    useFor: ["Allgemeine Orientierung", "Bundesweite Kontaktwege", "Bürgertelefon"],
+    note: "Für konkrete lokale Objektfragen ist in der Regel die kommunale Stelle passender.",
+  },
+  {
+    title: "RKI Kontakt",
+    organization: "Robert Koch-Institut",
+    description: "Kontakt- und Serviceinformationen des RKI.",
+    url: "https://www.rki.de/DE/Institut/Service-und-Besucherinformation/Kontakt/adressen_inhalt.html",
+    useFor: ["Fachinformation", "Quellenprüfung", "Weiterleitung an passende RKI-Stellen"],
+    note: "Das RKI ersetzt keine lokale behördliche Abstimmung oder individuelle medizinische Beratung.",
+  },
+]
+
+export const authorityWorkflow = [
+  {
+    title: "Zuständigkeit recherchieren",
+    text: "Über PLZ, Kommune oder Objektadresse klären, welches Gesundheitsamt, welche Stadtverwaltung oder welche Fachstelle zuständig sein könnte.",
+  },
+  {
+    title: "Neutralen Sachverhalt formulieren",
+    text: "Nur beobachtbare Fakten nennen: Objektart, sichtbare Hinweise, geplante Reinigung, gewünschte organisatorische Klärung. Keine Diagnose- oder Gefahrenbehauptung formulieren.",
+  },
+  {
+    title: "Fragen klar trennen",
+    text: "Gesundheitliche, arbeitsschutzfachliche, ordnungsrechtliche und gewerbliche Fragen getrennt stellen, damit die Anfrage intern richtig weitergeleitet werden kann.",
+  },
+  {
+    title: "Keine Freigabe suggerieren",
+    text: "Antworten von Behörden oder Städten nicht als allgemeine Zulassung, Zertifizierung oder Verkaufsargument verwenden.",
+  },
+  {
+    title: "Dokumentation ablegen",
+    text: "Datum, Kontaktstelle, Antwort, offene Punkte und Folgeaufgaben im Portal oder in der Einsatzdokumentation festhalten.",
+  },
 ]
 
 export const templates: TemplateFile[] = [
@@ -415,4 +566,6 @@ export const templates: TemplateFile[] = [
   { title: "Hinweistext für Kunden", description: "Neutraler Kundenhinweis zu Eigenverantwortung und Fachprüfung.", category: "Recht", file: "/templates/hinweistext-kunden.md" },
   { title: "Community-Regeln", description: "Regelwerk für sachlichen Austausch ohne riskante Aussagen.", category: "Community", file: "/templates/community-regeln.md" },
   { title: "Haftungsausschluss / Eigenverantwortung", description: "Textbaustein für allgemeine Orientierung und Drittanbieterhinweise.", category: "Recht", file: "/templates/haftungsausschluss-eigenverantwortung.md" },
+  { title: "Anfrage an Gesundheitsamt / Stadt", description: "Neutraler Anfragebaustein für Zuständigkeit, organisatorische Hinweise und Weiterleitung.", category: "Behördenkontakt", file: "/templates/anfrage-gesundheitsamt-stadt.md" },
+  { title: "Objektklärung Schädlingsprävention", description: "Vorlage für Fachbetriebe oder Objektverantwortliche zur sachlichen Vorabklärung.", category: "Schädlingsprävention", file: "/templates/objektklaerung-schaedlingspraevention.md" },
 ]

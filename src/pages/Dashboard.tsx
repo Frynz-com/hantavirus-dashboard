@@ -5,6 +5,7 @@ import {
   BadgeCheck,
   BookOpen,
   Building2,
+  CalendarDays,
   Check,
   ClipboardCheck,
   Download,
@@ -20,7 +21,9 @@ import {
   LockKeyhole,
   MessageCircle,
   Microscope,
+  Newspaper,
   PackageCheck,
+  Send,
   Search,
   Shield,
   ShieldAlert,
@@ -28,10 +31,9 @@ import {
   Sparkles,
   SprayCan,
   Star,
-  Users,
   Wrench,
 } from "lucide-react"
-import { equipmentGroups, portalResources, supplierFilters, suppliers, templates, type PortalResource, type RiskLevel, type Supplier } from "@/data/hantavirusPortal"
+import { authorityContacts, authorityWorkflow, equipmentGroups, newsItems, portalResources, supplierFilters, suppliers, templates, type PortalResource, type RiskLevel, type Supplier } from "@/data/hantavirusPortal"
 
 type NavKey =
   | "overview"
@@ -41,6 +43,7 @@ type NavKey =
   | "cleaning"
   | "pests"
   | "labs"
+  | "updates"
   | "templates"
   | "checks"
   | "community"
@@ -61,6 +64,7 @@ const navItems: NavItem[] = [
   { key: "cleaning", label: "Reinigung & Desinfektion", icon: SprayCan },
   { key: "pests", label: "Schädlingsprävention", icon: ShieldCheck },
   { key: "labs", label: "Labor- & Fachpartner", icon: FlaskConical },
+  { key: "updates", label: "Aktuelles & Behörden", icon: Newspaper },
   { key: "templates", label: "Vorlagen", icon: FileText },
   { key: "checks", label: "Checklisten", icon: ClipboardCheck },
   { key: "community", label: "Community", icon: MessageCircle },
@@ -265,8 +269,8 @@ function Overview({ setActive }: { setActive: (key: NavKey) => void }) {
   const tiles = [
     ["Lieferantenübersicht", "Mögliche Anbieter, Kategorien und Prüfhinsweise strukturiert durchsuchen.", Building2, "suppliers" as NavKey],
     ["Ausrüstungs-Checkliste", "PSA, Reinigung und Dokumentation mit Status verfolgen.", PackageCheck, "equipment" as NavKey],
-    ["Vorlagen & Dokumente", "Platzhalter für Anfragen, Einsatzprotokolle und Kundenhinweise.", FileText, "templates" as NavKey],
-    ["Community-Zugang", "Regeln und Zugangspunkt für den organisatorischen Austausch.", Users, "community" as NavKey],
+    ["Aktuelles & Behörden", "Offizielle Quellen, Monitoring und Stadt-/Gesundheitsamt-Anfragen.", Newspaper, "updates" as NavKey],
+    ["Vorlagen & Dokumente", "Anfragen, Einsatzprotokolle, Kundenhinweise und Behördenkontakt.", FileText, "templates" as NavKey],
   ]
   const info = ["Keine medizinische Beratung", "Eigenverantwortliche Prüfung", "Nur Informations- und Orientierungsplattform", "Keine Garantie für Zulassung oder Eignung"]
 
@@ -567,10 +571,99 @@ function LabsPage() {
   )
 }
 
+function UpdatesPage() {
+  return (
+    <section>
+      <SectionTitle
+        eyebrow="Aktuelles & Behörden"
+        title="Monitoring, Fachquellen und Stadtanfragen"
+        text="Dieser Bereich hilft Nutzern, offizielle Quellen zu beobachten und Anfragen an Stadt, Gesundheitsamt oder Fachstellen sauber vorzubereiten. Presse- und News-Links sind nur Monitoring-Hilfen und müssen gegen offizielle Quellen geprüft werden."
+      />
+      <div className="mb-5 rounded-[22px] border border-amber-200 bg-amber-50 p-5 text-sm font-semibold leading-6 text-amber-950">
+        <AlertTriangle className="mr-2 inline h-5 w-5" />
+        Keine Behörde, Stadt oder Fachstelle wird durch dieses Portal vertreten. Antworten dürfen nicht als pauschale Zulassung, Freigabe oder rechtliche Absicherung vermarktet werden.
+      </div>
+      <div className="grid gap-4 xl:grid-cols-[1.25fr_0.75fr]">
+        <div>
+          <h3 className="mb-4 text-lg font-semibold text-slate-950">News- und Quellenfeed</h3>
+          <div className="grid gap-4">
+            {newsItems.map((item) => (
+              <Card key={item.url} className="p-5">
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div>
+                    <div className="mb-3 flex flex-wrap gap-2">
+                      <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">{item.type}</span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">
+                        <CalendarDays className="h-3.5 w-3.5" />
+                        {item.dateLabel}
+                      </span>
+                    </div>
+                    <h4 className="text-lg font-semibold text-slate-950">{item.title}</h4>
+                    <p className="mt-1 text-sm font-bold text-slate-500">{item.source}</p>
+                    <p className="mt-3 text-sm leading-6 text-slate-600">{item.summary}</p>
+                  </div>
+                  <a href={item.url} target="_blank" rel="noreferrer" className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-slate-950 px-4 text-sm font-bold text-white hover:bg-teal-700">
+                    Öffnen <ExternalLink className="h-4 w-4" />
+                  </a>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3 className="mb-4 text-lg font-semibold text-slate-950">Anfrage-Workflow</h3>
+          <Card className="p-5">
+            <div className="space-y-4">
+              {authorityWorkflow.map((step, index) => (
+                <div key={step.title} className="flex gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-sm font-black text-teal-700">{index + 1}</div>
+                  <div>
+                    <p className="font-semibold text-slate-950">{step.title}</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">{step.text}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-5 grid gap-2">
+              <a href="/templates/anfrage-gesundheitsamt-stadt.md" target="_blank" rel="noreferrer" className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-teal-600 px-4 text-sm font-bold text-white hover:bg-teal-700">
+                Stadt-/Gesundheitsamt-Vorlage öffnen <Send className="h-4 w-4" />
+              </a>
+              <a href="/templates/objektklaerung-schaedlingspraevention.md" target="_blank" rel="noreferrer" className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-bold text-slate-700">
+                Objektklärung öffnen <BookOpen className="h-4 w-4" />
+              </a>
+            </div>
+          </Card>
+        </div>
+      </div>
+      <div className="mt-7">
+        <h3 className="mb-4 text-lg font-semibold text-slate-950">Behörden- und Fachstellenfinder</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          {authorityContacts.map((contact) => (
+            <Card key={contact.url} className="p-5">
+              <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-600">{contact.organization}</span>
+              <h4 className="mt-4 text-lg font-semibold text-slate-950">{contact.title}</h4>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{contact.description}</p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {contact.useFor.map((item) => (
+                  <span key={item} className="rounded-full border border-slate-200 px-3 py-1 text-xs font-bold text-slate-600">{item}</span>
+                ))}
+              </div>
+              <p className="mt-4 rounded-2xl bg-amber-50 p-3 text-xs font-semibold leading-5 text-amber-900">{contact.note}</p>
+              <a href={contact.url} target="_blank" rel="noreferrer" className="mt-4 inline-flex h-10 items-center gap-2 rounded-xl bg-slate-950 px-4 text-sm font-bold text-white hover:bg-teal-700">
+                Kontaktquelle öffnen <ExternalLink className="h-4 w-4" />
+              </a>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function TemplatesPage() {
   return (
     <section>
-      <SectionTitle eyebrow="Vorlagen" title="Download-Karten für Platzhalter-Vorlagen" text="Die Dateien sind als Struktur vorbereitet und können später durch echte Dokumente ersetzt werden." />
+      <SectionTitle eyebrow="Vorlagen" title="Download-Karten für Vorlagen" text="Die Dateien sind als sofort nutzbare Textvorlagen vorbereitet und können später durch PDF- oder DOCX-Dokumente ersetzt werden." />
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {templates.map((template) => (
           <Card key={template.title} className="p-5">
@@ -621,9 +714,10 @@ function CommunityPage() {
   return (
     <section>
       <SectionTitle eyebrow="Community" title="Community-Zugang" text="Tausche dich mit anderen Interessierten aus, stelle organisatorische Fragen und teile Erfahrungen. Medizinische, rechtliche oder behördliche Fragen müssen mit qualifizierten Fachstellen geklärt werden." />
-      <a href="https://t.me/" target="_blank" rel="noreferrer" className="mb-6 inline-flex h-12 items-center gap-2 rounded-2xl bg-teal-600 px-5 text-sm font-bold text-white hover:bg-teal-700">
-        Telegram-Gruppe öffnen <ExternalLink className="h-4 w-4" />
-      </a>
+      <div className="mb-6 rounded-[22px] border border-amber-200 bg-amber-50 p-5">
+        <p className="text-sm font-bold text-amber-950">Telegram-Link noch eintragen</p>
+        <p className="mt-2 text-sm leading-6 text-amber-900">Hier sollte vor Veröffentlichung die echte Gruppen-URL hinterlegt werden. Bis dahin wird kein generischer oder falscher Telegram-Link angezeigt.</p>
+      </div>
       <div className="grid gap-3 md:grid-cols-2">
         {rules.map((rule) => (
           <Card key={rule} className="p-4">
@@ -678,6 +772,7 @@ function SupportPage() {
 
 function PestsPage() {
   const items = ["Schädlingsbekämpfer", "Mäusefallen", "Köderstationen", "Abdichtungsmaterial", "Monitoring-Systeme", "Fachbetriebe für Objektkontrolle"]
+  const resources = portalResources.filter((resource) => ["Forschung / Tiergesundheit", "Behördenkontakt", "Kundeninformation"].includes(resource.area))
   return (
     <section>
       <SectionTitle eyebrow="Schädlingsprävention" title="Prävention, Monitoring und Fachbetriebe" text="Dieser Bereich bündelt mögliche Kategorien für Objektkontrolle und Prävention. Auswahl, Zulässigkeit und Durchführung müssen fachlich geprüft werden." />
@@ -686,10 +781,11 @@ function PestsPage() {
           <Card key={item} className="p-5">
             <Wrench className="mb-4 h-6 w-6 text-teal-700" />
             <h3 className="text-lg font-semibold text-slate-950">{item}</h3>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Platzhalter-Kategorie für spätere Anbieterpflege und fachliche Eigenprüfung.</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">Kategorie für Anbieterrecherche, Objektklärung und fachliche Eigenprüfung.</p>
           </Card>
         ))}
       </div>
+      <ResourceGrid resources={resources} title="Fachquellen für Objekt- und Behördenklärung" />
     </section>
   )
 }
@@ -702,6 +798,7 @@ function Content({ active, setActive }: { active: NavKey; setActive: (key: NavKe
   if (active === "cleaning") return <CleaningPage />
   if (active === "pests") return <PestsPage />
   if (active === "labs") return <LabsPage />
+  if (active === "updates") return <UpdatesPage />
   if (active === "templates") return <TemplatesPage />
   if (active === "checks") return <ChecklistsPage />
   if (active === "community") return <CommunityPage />
