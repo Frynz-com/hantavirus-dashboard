@@ -348,7 +348,6 @@ function Steps() {
 }
 
 function SupplierCard({ supplier, favorite, onFavorite }: { supplier: Supplier; favorite: boolean; onFavorite: () => void }) {
-  const disabled = supplier.website === "#"
   return (
     <Card className="flex h-full flex-col p-5">
       <div className="mb-4 flex items-start justify-between gap-4">
@@ -385,10 +384,10 @@ function SupplierCard({ supplier, favorite, onFavorite }: { supplier: Supplier; 
       </div>
       <div className="mt-auto pt-5">
         <a
-          href={disabled ? undefined : supplier.website}
-          target={disabled ? undefined : "_blank"}
+          href={supplier.website}
+          target="_blank"
           rel="noreferrer"
-          className={`inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl text-sm font-bold ${disabled ? "cursor-not-allowed bg-slate-100 text-slate-400" : "bg-slate-950 text-white hover:bg-teal-700"}`}
+          className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 text-sm font-bold text-white hover:bg-teal-700"
         >
           Anbieter öffnen <ExternalLink className="h-4 w-4" />
         </a>
@@ -628,12 +627,12 @@ function UpdatesPage() {
               ))}
             </div>
             <div className="mt-5 grid gap-2">
-              <a href="/templates/anfrage-gesundheitsamt-stadt.md" target="_blank" rel="noreferrer" className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl bg-teal-600 px-4 text-sm font-bold text-white hover:bg-teal-700">
-                Stadt-/Gesundheitsamt-Vorlage öffnen <Send className="h-4 w-4" />
-              </a>
-              <a href="/templates/objektklaerung-schaedlingspraevention.md" target="_blank" rel="noreferrer" className="inline-flex h-11 items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-bold text-slate-700">
-                Objektklärung öffnen <BookOpen className="h-4 w-4" />
-              </a>
+              <button type="button" disabled className="inline-flex h-11 cursor-not-allowed items-center justify-center gap-2 rounded-2xl bg-slate-100 px-4 text-sm font-bold text-slate-400">
+                Stadt-/Gesundheitsamt-Vorlage demnächst <Send className="h-4 w-4" />
+              </button>
+              <button type="button" disabled className="inline-flex h-11 cursor-not-allowed items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 text-sm font-bold text-slate-400">
+                Objektklärung demnächst <BookOpen className="h-4 w-4" />
+              </button>
             </div>
           </Card>
         </div>
@@ -760,8 +759,10 @@ function TemplatesPage() {
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {templates.map((template) => (
           <Card key={template.title} className="p-5">
-            <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">{template.category}</span>
-            <span className="ml-2 rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800">Demnächst verfügbar</span>
+            <div className="flex flex-wrap gap-2">
+              <span className="rounded-full bg-teal-50 px-3 py-1 text-xs font-bold text-teal-800">{template.category}</span>
+              <span className="rounded-full bg-amber-50 px-3 py-1 text-xs font-bold text-amber-800">Demnächst verfügbar</span>
+            </div>
             <h3 className="mt-4 text-lg font-semibold text-slate-950">{template.title}</h3>
             <p className="mt-2 min-h-12 text-sm leading-6 text-slate-600">{template.description}</p>
             <div className="mt-5 flex gap-2">

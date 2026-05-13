@@ -29,7 +29,6 @@ export type TemplateFile = {
   title: string
   description: string
   category: string
-  file: string
 }
 
 export type MemberDocument = {
@@ -61,7 +60,7 @@ export type AuthorityContact = {
 }
 
 const labNotice =
-  "Nur für qualifizierte Labore/Fachstellen. Nicht als Laien-Schnelltest oder eigenständiges Testzentrum verwenden. Zulassung, Zweckbestimmung und IVDR/CE-IVD-Status direkt beim Anbieter prüfen."
+  "Nur für qualifizierte Labore/Fachstellen. Nicht für Laienanwendungen oder eigenständige Testangebote verwenden. Zweckbestimmung, regulatorischen Status und IVDR/CE-IVD-Informationen direkt beim Anbieter prüfen."
 
 export const suppliers: Supplier[] = [
   {
@@ -268,7 +267,7 @@ export const suppliers: Supplier[] = [
     region: "Deutschland / EU",
     suitableFor: ["Staubklasse H", "Nass-/Trockensauger", "Reinigungsplanung"],
     riskLevel: "medium",
-    notes: "Technische Zulassung, Filterkonzept, Zubehör und Einsatzgrenzen direkt beim Anbieter prüfen.",
+    notes: "Technische Angaben, Filterkonzept, Zubehör und Einsatzgrenzen direkt beim Anbieter prüfen.",
     status: "Nur Anfrage erforderlich",
     tags: ["Reinigung", "Deutschland", "EU", "Nur Anfrage erforderlich", "Muss fachlich geprüft werden"],
     lastChecked: "13.05.2026",
@@ -678,15 +677,15 @@ export const memberDocuments: MemberDocument[] = [
 ]
 
 export const templates: TemplateFile[] = [
-  { title: "Lieferanten-Anfrage", description: "Strukturierte Fragen zu Preis, Verfügbarkeit, Zweckbestimmung und Nachweisen.", category: "Beschaffung", file: "/templates/lieferanten-anfrage.md" },
-  { title: "Kunden-Erstgespräch", description: "Leitfaden für organisatorische Erstklärung ohne medizinische Aussagen.", category: "Kundenkontakt", file: "/templates/kunden-erstgespraech.md" },
-  { title: "Ausrüstungs-Checkliste", description: "Prüfliste für PSA, Reinigung, Dokumentation und Entsorgung.", category: "Ausrüstung", file: "/templates/ausruestungs-checkliste.md" },
-  { title: "Risiko-Checkliste Objekt", description: "Objektbezogene Orientierung für Vorprüfung und Fachstellenkontakt.", category: "Objekt", file: "/templates/risiko-checkliste-objekt.md" },
-  { title: "Einsatz-Dokumentation", description: "Protokollstruktur für Fotos, Zeiten, Beteiligte und Hinweise.", category: "Dokumentation", file: "/templates/einsatz-dokumentation.md" },
-  { title: "Angebotstext für Reinigungsdienstleister", description: "Vorsichtige Angebotsbausteine ohne Garantie- oder Diagnoseversprechen.", category: "Marketing", file: "/templates/angebotstext-reinigungsdienstleister.md" },
-  { title: "Hinweistext für Kunden", description: "Neutraler Kundenhinweis zu Eigenverantwortung und Fachprüfung.", category: "Recht", file: "/templates/hinweistext-kunden.md" },
-  { title: "Community-Regeln", description: "Regelwerk für sachlichen Austausch ohne riskante Aussagen.", category: "Community", file: "/templates/community-regeln.md" },
-  { title: "Haftungsausschluss / Eigenverantwortung", description: "Textbaustein für allgemeine Orientierung und Drittanbieterhinweise.", category: "Recht", file: "/templates/haftungsausschluss-eigenverantwortung.md" },
-  { title: "Anfrage an Gesundheitsamt / Stadt", description: "Neutraler Anfragebaustein für Zuständigkeit, organisatorische Hinweise und Weiterleitung.", category: "Behördenkontakt", file: "/templates/anfrage-gesundheitsamt-stadt.md" },
-  { title: "Objektklärung Schädlingsprävention", description: "Vorlage für Fachbetriebe oder Objektverantwortliche zur sachlichen Vorabklärung.", category: "Schädlingsprävention", file: "/templates/objektklaerung-schaedlingspraevention.md" },
+  { title: "Lieferanten-Anfrage", description: "Strukturierte Fragen zu Preis, Verfügbarkeit, Zweckbestimmung und Nachweisen.", category: "Beschaffung" },
+  { title: "Kunden-Erstgespräch", description: "Leitfaden für organisatorische Erstklärung ohne medizinische Aussagen.", category: "Kundenkontakt" },
+  { title: "Ausrüstungs-Checkliste", description: "Prüfliste für PSA, Reinigung, Dokumentation und Entsorgung.", category: "Ausrüstung" },
+  { title: "Risiko-Checkliste Objekt", description: "Objektbezogene Orientierung für Vorprüfung und Fachstellenkontakt.", category: "Objekt" },
+  { title: "Einsatz-Dokumentation", description: "Protokollstruktur für Fotos, Zeiten, Beteiligte und Hinweise.", category: "Dokumentation" },
+  { title: "Angebotstext für Reinigungsdienstleister", description: "Vorsichtige Angebotsbausteine ohne Garantie- oder Diagnoseversprechen.", category: "Marketing" },
+  { title: "Hinweistext für Kunden", description: "Neutraler Kundenhinweis zu Eigenverantwortung und Fachprüfung.", category: "Recht" },
+  { title: "Community-Regeln", description: "Regelwerk für sachlichen Austausch ohne riskante Aussagen.", category: "Community" },
+  { title: "Haftungsausschluss / Eigenverantwortung", description: "Textbaustein für allgemeine Orientierung und Drittanbieterhinweise.", category: "Recht" },
+  { title: "Anfrage an Gesundheitsamt / Stadt", description: "Neutraler Anfragebaustein für Zuständigkeit, organisatorische Hinweise und Weiterleitung.", category: "Behördenkontakt" },
+  { title: "Objektklärung Schädlingsprävention", description: "Vorlage für Fachbetriebe oder Objektverantwortliche zur sachlichen Vorabklärung.", category: "Schädlingsprävention" },
 ]
