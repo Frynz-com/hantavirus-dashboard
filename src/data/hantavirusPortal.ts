@@ -69,7 +69,7 @@ export const portalMeta = {
   name: "Hantavirus Präventionsnetzwerk",
   dataStatus: "13.05.2026",
   supplierCount: 18,
-  documentCount: 12,
+  documentCount: 13,
   intendedUse: "Informations- und Orientierungsplattform",
 }
 
@@ -702,6 +702,15 @@ export const memberDocuments: MemberDocument[] = [
     size: "234 KB",
     audience: "Mitglieder / interne Nutzung",
     note: "Vor externer Nutzung juristisch und fachlich prüfen.",
+  },
+  {
+    title: "Arbeits- und Vorbereitungsskizze Fachpartner / Teststation",
+    description: "Vorbereitungsunterlage für interne Planung und Gespräche mit berechtigten medizinischen Fachstellen oder Laborpartnern.",
+    category: "Fachpartner-Vorbereitung",
+    file: "/downloads/hantavirus/arbeits-vorbereitungsskizze-fachpartner-teststation.pdf",
+    size: "440 KB",
+    audience: "Interne Vorbereitung / Fachpartnergespräche",
+    note: "Keine Anleitung zur eigenständigen Testdurchführung am Menschen. Diagnostik nur durch berechtigte medizinische Stellen, Labore oder qualifizierte Partner prüfen und durchführen lassen.",
   },
   {
     title: "Hantavirus Reiseratgeber",

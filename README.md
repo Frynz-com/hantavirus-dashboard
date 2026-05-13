@@ -9,7 +9,7 @@ Dieses Projekt verkauft keine medizinischen Tests, gibt keine medizinische Berat
 ## Inhalte
 
 - Lieferanten- und Ausrüstungsübersicht mit Suche, Filtern, Risiko-Badges und Favoriten
-- Dokumenten-Bibliothek mit 12 PDF-Unterlagen
+- Dokumenten-Bibliothek mit 13 PDF-Unterlagen
 - Aktuelles & Behörden mit offiziellen Quellen, Monitoring und Behördenfinder
 - Reinigung, Desinfektion und Schädlingsprävention als vorsichtige Orientierung
 - Labor- und Fachpartnerbereich mit regulatorisch sensiblen Hinweisen
@@ -67,6 +67,7 @@ public/downloads/hantavirus
 ```
 
 Sie werden im Dashboard im Bereich **Dokumente** angezeigt.
+Die enthaltene Arbeits- und Vorbereitungsskizze zum Thema Fachpartner/Teststation ist nur als interne Vorbereitung für Gespräche mit berechtigten medizinischen Stellen oder Laborpartnern gedacht und nicht als Anleitung zur eigenständigen Testdurchführung am Menschen.
 
 ## Vorlagen
 
